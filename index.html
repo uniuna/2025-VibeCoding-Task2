@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>UNA · Web UI 網頁設計師 個人品牌網站骨架</title>
+  <title>UNA · Web UI Designer and Developer</title>
   <meta name="description" content="這是一個 Web UI 網頁設計師的個人品牌網站，用來展示介面設計作品、設計流程與視覺風格，並提供合作洽談與聯絡方式。">
   <style>
     /* CSS:BASE-START */
@@ -64,6 +64,62 @@
       align-items: center;
       justify-content: space-between;
       gap: 0.75rem;
+      position: relative;
+    }
+
+    /* 行動選單（預設：手機隱藏 menu，顯示漢堡） */
+    .nav-toggle {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      padding: 0;
+      border-radius: 8px;
+      border: 1px solid transparent;
+      background: transparent;
+      color: #e5e7eb;
+      cursor: pointer;
+    }
+
+    .nav-toggle:focus {
+      outline: 2px solid #38bdf8;
+      outline-offset: 2px;
+    }
+
+    .nav-menu {
+      display: none;
+      position: absolute;
+      top: calc(100% + 8px);
+      right: 1rem;
+      background: rgba(15, 23, 42, 0.98);
+      border: 1px solid rgba(59, 130, 246, 0.12);
+      border-radius: 0.6rem;
+      padding: 0.6rem;
+      min-width: 200px;
+      box-shadow: 0 10px 30px rgba(2, 6, 23, 0.6);
+      z-index: 20;
+    }
+
+    .nav-menu.open {
+      display: block;
+    }
+
+    .nav-menu .nav-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+      margin: 0;
+    }
+
+    .nav-menu .nav-link {
+      display: block;
+      padding: 0.5rem 0.75rem;
+      border-radius: 6px;
+    }
+
+    .nav-menu .nav-link:hover {
+      background: rgba(59, 130, 246, 0.06);
     }
 
     .nav-brand {
@@ -745,6 +801,25 @@
         padding-inline: 1.5rem;
       }
 
+      /* 桌面：隱藏漢堡、顯示水平選單 */
+      .nav-toggle {
+        display: none;
+      }
+
+      .nav-menu {
+        display: block;
+        position: static;
+        background: transparent;
+        border: none;
+        padding: 0;
+        box-shadow: none;
+      }
+
+      .nav-menu .nav-list {
+        flex-direction: row;
+        gap: 0.5rem;
+      }
+
       main {
         padding: 2.3rem 1.5rem 4rem;
       }
@@ -803,15 +878,28 @@
   <div class="page">
     <header class="site-header">
       <div class="nav">
-        <div class="nav-brand"> <a href="#hero"> <span>◎</span> Your Name · Web UI 網頁設計師 </a> </div>
+        <div class="nav-brand"> <a href="#hero"> <span>◎</span> UNA · Web UI Designer and Developer </a> </div>
+
+        <!-- 修改：新增漢堡按鈕並將 ul 包入 .nav-menu（行動/桌面共用） -->
         <nav aria-label="主要導覽">
-          <ul class="nav-list">
-            <li><a class="nav-link" href="#hero">首頁</a></li>
-            <li><a class="nav-link" href="#about">關於我</a></li>
-            <li><a class="nav-link" href="#skills">技能</a></li>
-            <li><a class="nav-link" href="#projects">作品集</a></li>
-            <li><a class="nav-link" href="#contact">聯絡我</a></li>
-          </ul>
+          <button class="nav-toggle" aria-expanded="false" aria-controls="mobile-menu" aria-label="切換主選單">
+            <!-- 簡單漢堡圖示（SVG） -->
+            <svg width="20" height="14" viewBox="0 0 20 14" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <rect y="0.5" width="20" height="2" rx="1" fill="currentColor"/>
+              <rect y="6" width="20" height="2" rx="1" fill="currentColor"/>
+              <rect y="11.5" width="20" height="2" rx="1" fill="currentColor"/>
+            </svg>
+          </button>
+
+          <div id="mobile-menu" class="nav-menu" aria-hidden="true">
+            <ul class="nav-list">
+              <li><a class="nav-link" href="#hero">首頁</a></li>
+              <li><a class="nav-link" href="#about">關於我</a></li>
+              <li><a class="nav-link" href="#skills">技能</a></li>
+              <li><a class="nav-link" href="#projects">作品集</a></li>
+              <li><a class="nav-link" href="#contact">聯絡我</a></li>
+            </ul>
+          </div>
         </nav>
       </div>
     </header>
@@ -997,80 +1085,6 @@
                 <span class="project-meta">個人專案示意</span>
               </div>
               <p class="project-body">
-                此處預計放入專案簡述，例如專案目標、品牌調性、資訊架構與實際產出。可以 2～3 句話說明專案背景與成果，並提供實際線上連結。
-              </p>
-              <div class="project-tags">
-                <span class="project-tag">行銷頁面設計</span>
-                <span class="project-tag">RWD 版面</span>
-                <span class="project-tag">示意標籤</span>
-              </div>
-            </article>
-
-            <article class="project-card">
-              <div class="project-title-row">
-                <h3 class="project-title">作品卡片占位 · Web App 介面</h3>
-                <span class="project-meta">合作專案示意</span>
-              </div>
-              <p class="project-body">
-                第二張卡片可以用來說明與產品、工程團隊協作的 web app 介面專案，並強調在設計流程、互動規劃與元件系統上的具體貢獻。
-              </p>
-              <div class="project-tags">
-                <span class="project-tag">介面設計</span>
-                <span class="project-tag">設計系統</span>
-                <span class="project-tag">設計／前端協作</span>
-              </div>
-            </article>
-          </div>
-
-          <p class="project-hint">
-            之後會用 Section SDD 的 Prompt 產生新的 section，請把新的 section 程式碼整段貼在 <span class="pill-note"><span
-                class="pill-note-strong">SECTION:PROJECTS-START</span> ～ <span
-                class="pill-note-strong">SECTION:PROJECTS-END</span> 註解中間</span>，完全取代現在這一區（包含所有示意作品卡片）。
-          </p>
-        </div>
-      </section>
-      <!-- SECTION:PROJECTS-END -->
-
-      <!-- SECTION:CONTACT-START -->
-      <section id="contact" class="section section-contact" aria-labelledby="contact-heading">
-        <div class="container">
-          <h2 id="contact-heading" class="section-title">
-            聯絡我（占位內容）
-            <span>Contact · Get in Touch</span>
-          </h2>
-          <div class="contact-body">
-            <p>
-              Contact 區預計用來放置聯絡方式與合作說明，例如 E-mail、社群連結或履歷／作品集下載連結。你也可以在這裡寫上一兩句話，說明目前開放的合作類型（例如品牌網站、Web UI 設計、長期合作等）。
-            </p>
-            <p>
-              下方列出的 Email、電話與社群連結皆為示意用 placeholder，請在正式上線前更換為自己的資訊，或依需求調整種類與排列方式。
-            </p>
-          </div>
-
-          <ul class="contact-list">
-            <li class="contact-item">
-              <span class="contact-label">Email</span>
-              <a class="contact-link" href="mailto:hello@example.com">hello@example.com</a>
-              <span class="contact-meta">建議使用常用聯絡信箱，方便合作方直接與你聯繫。</span>
-            </li>
-            <li class="contact-item">
-              <span class="contact-label">Phone</span>
-              <a class="contact-link" href="tel:+886900000000">+886 900 000 000</a>
-              <span class="contact-meta">如不方便公開手機，可改為僅列 Email 或表單連結。</span>
-            </li>
-            <li class="contact-item">
-              <span class="contact-label">GitHub</span>
-              <a class="contact-link" href="https://github.com/yourname">https://github.com/yourname</a>
-              <span class="contact-meta">如同時會進行前端實作，可在這裡放置程式碼作品與開源貢獻。</span>
-            </li>
-            <li class="contact-item">
-              <span class="contact-label">LinkedIn</span>
-              <a class="contact-link"
-                href="https://www.linkedin.com/in/yourname">https://www.linkedin.com/in/yourname</a>
-              <span class="contact-meta">可作為職涯資訊與人脈連結的延伸頁面。</span>
-            </li>
-          </ul>
-
           <p class="contact-note">
             之後會用 Section SDD 的 Prompt 產生新的 section，請把新的 section 程式碼整段貼在 <span class="pill-note"><span
                 class="pill-note-strong">SECTION:CONTACT-START</span> ～ <span
@@ -1089,6 +1103,43 @@
       </div>
     </footer>
   </div>
+
+  <!-- 在 body 結尾前新增：切換行動選單的簡單腳本 -->
+  <script>
+    (function () {
+      const btn = document.querySelector('.nav-toggle');
+      const menu = document.getElementById('mobile-menu');
+      if (!btn || !menu) return;
+      btn.addEventListener('click', function (e) {
+        const open = btn.getAttribute('aria-expanded') === 'true';
+        btn.setAttribute('aria-expanded', String(!open));
+        if (!open) {
+          menu.classList.add('open');
+          menu.setAttribute('aria-hidden', 'false');
+        } else {
+          menu.classList.remove('open');
+          menu.setAttribute('aria-hidden', 'true');
+        }
+      });
+      // 點擊頁面任意處關閉（排除按鈕與選單）
+      document.addEventListener('click', function (e) {
+        if (!btn.contains(e.target) && !menu.contains(e.target)) {
+          btn.setAttribute('aria-expanded', 'false');
+          menu.classList.remove('open');
+          menu.setAttribute('aria-hidden', 'true');
+        }
+      });
+      // 鍵盤 Esc 關閉
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') {
+          btn.setAttribute('aria-expanded', 'false');
+          menu.classList.remove('open');
+          menu.setAttribute('aria-hidden', 'true');
+          btn.focus();
+        }
+      });
+    })();
+  </script>
 </body>
 
 </html>
